@@ -11,6 +11,8 @@ describe('Posts API', () => {
         const result = await pool.query(
             `INSERT INTO authors (name, email, bio)
             VALUES ($1, $2, $3)
+            ON CONFLICT (email)
+            DO UPDATE SET name = EXCLUDED.name
             RETURNING id`,
             ['Post Test Author', 'post.test.author@example.com', 'Author for post tests']
         );
