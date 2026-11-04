@@ -4,6 +4,7 @@ const authorsController = require('../controllers/authors.controller');
 
 const router = express.Router();
 
+// routes documentadas para swagger
 /**
  * @swagger
  * tags:
@@ -20,6 +21,12 @@ const router = express.Router();
  *     responses:
  *       200:
  *         description: List of authors
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Author'
  */
 router.get('/', authorsController.getAllAuthors);
 
@@ -38,6 +45,10 @@ router.get('/', authorsController.getAllAuthors);
  *     responses:
  *       200:
  *         description: Author found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Author'
  *       404:
  *         description: Author not found
  */
@@ -71,6 +82,10 @@ router.get('/:id', authorsController.getAuthorById);
  *     responses:
  *       201:
  *         description: Author created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Author'
  *       400:
  *         description: Invalid input
  *       409:
@@ -109,6 +124,10 @@ router.post('/', authorsController.createAuthor);
  *     responses:
  *       200:
  *         description: Author updated
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Author'
  *       400:
  *         description: Invalid input
  *       404:
@@ -130,9 +149,19 @@ router.put('/:id', authorsController.updateAuthor);
  *         required: true
  *         schema:
  *           type: integer
- *     responses:
+  *     responses:
  *       200:
  *         description: Author deleted
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Autor eliminado correctamente
+ *                 author:
+ *                   $ref: '#/components/schemas/Author'
  *       404:
  *         description: Author not found
  */
